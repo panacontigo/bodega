@@ -1,0 +1,43 @@
+/* Show it is fixed to the top */
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+
+.bg-yc{
+    background-color:#1769ff!important
+}
+.btn-outline-yc{
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.tab-pane{
+
+    padding-top: 15px;
+
+}
+
+.negrita{
+
+    font-weight: bold;
+}
+
+input{
+
+font-weight: bold;
+
+}
+
+
+.debe{
+   color:red;
+}
+.completo{
+    color:blue;
+ }
+
+ label#sms_resto{
+
+    font-size: 0.8em;
+ }

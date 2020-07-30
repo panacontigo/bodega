@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="sistema de calculo para bodegas">
+    <meta name="author" content="jorge paredes">
+
+    <title>Bodega</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="bodega.css?dsfdy66ddzrd" rel="stylesheet">
+</head>
+
+<body>
+    <!-- MENU PRINCIPAL -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-yc">
+        <a class="navbar-brand" href="#">Inversiones Y.C</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Precio Dolar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-yc my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+
+    <main>
+
+
+        <div class="network-status"></div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                    aria-selected="true">Calculadora</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                    aria-controls="profile" aria-selected="false">Dolar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                    aria-controls="contact" aria-selected="false">Historial</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="col-md-12">
+                    <div class="card ">
+
+                        <div class="card-body ">
+                            <form class="form-horizontal">
+                                <div class="row">
+                                    <label class="col-md-6 col-form-label">Precio del Dolar</label>
+                                    <div class="col-md-6">
+                                        <div class="form-group has-default ">
+                                            <input id="precio_bs_dolar" name="precio_bs_dolar" type="text"
+                                                class="col-8 form-control yc-numbers negrita" style="display:inline;">
+                                             <a id="save_p_dolar"class="col-3 btn btn-fill btn-primary  " style="vertical-align:top;">Act.</a>   
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-6 col-form-label">Total de Venta Bs.S</label>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="total_bs_venta" name="total_bs_venta" type="text"
+                                                class="form-control yc-numbers negrita">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+            
+                        <div class="container-fluid">
+                        <ul class="nav nav-tabs" id="myTab_c" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#p_uno" role="tab" aria-controls="home"
+                                    aria-selected="true">Calculo Divisas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#p_dos" role="tab"
+                                    aria-controls="profile" aria-selected="false">Pago</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="p_uno" role="tabpanel" aria-labelledby="p_uno-tab">
+                             
+                                <table  class=" table-responsive">
+                                    <tbody>
+                                
+                                        <tr>
+                                            <td>
+                                                <label class="col-md-12 col-form-label">Monto Dolar(es) :</label>
+                                            </td>
+                                            <td>
+                                                <span id="monto_dolar" class="negrita"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-md-12 col-form-label">Monto Bs.(es) :</label>
+                                            </td>
+                                            <td >
+                                                <span id="monto_bs" class="negrita"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"> <label class="col-md-12 col-form-label" id="sms_faltante">Bs.S Faltante</label></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            
+                            <div class="tab-pane fade " id="p_dos" role="tabpanel" aria-labelledby="p_dos-tab">
+                            
+                                <div class="row">
+                                    <label class="col-md-6 col-form-label">Pago en Dolares</label>
+                                    <div class="col-md-6">
+                                        <div class="form-group has-default">
+                                            <input id="pago_dolar" name="pago_dolar" type="text"
+                                                class="form-control yc-numbers negrita">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-6 col-form-label">Pago en Bolivares</label>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="pago_bs" name="pago_bs" type="text"
+                                                class="form-control yc-numbers negrita">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <table  class=" table-responsive">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label class="col-md-12 col-form-label">Resto Dolar(es) :</label>
+                                                </td>
+                                                <td>
+                                                    <span id="resto_dolar" class="negrita"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="col-md-12 col-form-label">Resto Bs.(es) :</label>
+                                                </td>
+                                                <td >
+                                                    <span id="resto_bs" class="negrita"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"> <label class="col-md-12 col-form-label" id="sms_resto">Bs.S Faltante</label></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                         </div>
+                         </div>
+                         <div class="card-footer ">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <button id="prueba" type="submit"  class="btn btn-fill btn-primary">Calcular</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+       
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="col-md-12" id="box_twitter">
+                    <a onclick="act_pag_dolar('#frame_dolar'); return false;" style="font-weight: bold; color:crimson;">
+                        ((( Pulsa aqui , para actualizar ..!!! )))</a><br />
+                    <iframe id="frame_dolar"
+                        style="width:320px;height:1200px;margin-top:0px;margin-bottom: 0px;padding:0px"
+                        src="dolartwitter.html" scrolling="no" frameborder="no" allowtransparency="true"></iframe>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="col-md-12" id="box_twitter">
+                    <h3>Hola undo</h3>>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/axios.min.js"></script>
+    <script src="bodega.js?8dsddrf"></script>
+</body>
+
+</html>
