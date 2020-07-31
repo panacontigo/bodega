@@ -65,7 +65,7 @@ function setinput(funcion){
 function act_pag_dolar(_obj) {
   var iframedolar = $(_obj)?$(_obj):false;
   if(iframedolar){
-      iframedolar.prop("src",iframedolar.prop("src")+"?timestamp=" + new Date().getTime());
+      iframedolar.prop("src","/dolartwitter.html?timestamp=" + new Date().getTime());
   }
 }
 
@@ -143,6 +143,8 @@ function init() {
           r_bs      : $("#resto_bs"),
           label_faltante: $("#sms_faltante"),
           label_resto: $("#sms_resto"),
+          label_p_dolar:$("#sms_p_dolar"),
+          label_t_venta:$("#sms_t_venta"),
           f_calcular:function(){
 
              var precio_bs_dolar =  this.p_b_dolar.data("val_float");
@@ -153,11 +155,12 @@ function init() {
              dolares = (isNaN(dolares)||dolares==Infinity)?0:dolares;
              console.log("xz:dolares:"+dolares);
              var dolares_int = Math.trunc(dolares);
+
              if(total_bs_venta >= precio_bs_dolar  ){
 
            
 
-                this.m_dolar.text(dolares_int);
+                this.m_dolar.val(dolares_int);
                 var bolivares  = (precio_bs_dolar *  (dolares - dolares_int)).toFixed(0);
 
                 if(bolivares >0 ){
@@ -184,16 +187,16 @@ function init() {
 
              }else{
              
-                this.m_dolar.text(0);
+                this.m_dolar.val(0);
                 var bolivares  = total_bs_venta;
                 this.label_faltante.html(" le hace falta :<b>"+(precio_bs_dolar-total_bs_venta)+
                 " Bs.</b><br/> para completar <b> 1  Dolar ($)</b>");
 
              }
 
-             this.m_bs.text(bolivares);
-             setdata_float_text(this.m_bs[0]);
-             setdata_float_text(this.m_dolar[0]);
+             this.m_bs.val(bolivares);
+             setdata_float_input(this.m_bs[0]);
+             setdata_float_input(this.m_dolar[0]);
              
           },
           f_pago:function(){
@@ -216,26 +219,26 @@ function init() {
 
                  if(monto_bs>0){
                   console.log("primero 2");
-                   this.r_dolar.text(0);
+                   this.r_dolar.val(0);
 
 
                    if(pago_bs>0){
 
                        if(bolivares==0){
 
-                          this.label_resto.html("El cliente ha realizado el pago completo");
+                          this.label_resto.html("El cliente ha realizado el pago ");
                           toglee_pago_class(true);
                           
 
                        }else if(bolivares>0){
 
-                          this.r_bs.text(bolivares);
-                          this.label_resto.html("El cliente ha realizado el pago completo");
+                          this.r_bs.val(bolivares);
+                          this.label_resto.html("El cliente ha realizado el pago ");
                           toglee_pago_class(true);
 
                        }else{
 
-                          this.r_bs.text(0);
+                          this.r_bs.val(0);
                           this.label_resto.html("El cliente debe :<b>"+ (-1 * bolivares) +" Bs.</b>");
                           toglee_pago_class(false);
 
@@ -245,7 +248,7 @@ function init() {
                    }else {
 
                      // console.log("tambien aqui");
-                      this.r_bs.text(0);
+                      this.r_bs.val(0);
                       this.label_resto.html("El cliente debe :<b>"+monto_bs +"</b> Bs.");
                       toglee_pago_class(false);
                    }
@@ -253,10 +256,10 @@ function init() {
 
                  }else{
                  // console.log("primero 22");
-                  this.r_bs.text(pago_bs);
-                  this.r_dolar.text(0);
+                  this.r_bs.val(pago_bs);
+                  this.r_dolar.val(0);
 
-                  var stringsms = "El cliente ha realizado el pago completo";
+                  var stringsms = "El cliente ha realizado el pago ";
                  
                     if(pago_bs>0){
 
@@ -281,15 +284,15 @@ function init() {
 
                 if(res_bs<=0){
 
-                  this.r_dolar.text(0);
-                  this.r_bs.text((-1*res_bs));
-                  this.label_resto.html("El cliente ha pagado completo");
+                  this.r_dolar.val(0);
+                  this.r_bs.val((-1*res_bs));
+                  this.label_resto.html("El cliente ha pagado ");
                   toglee_pago_class(true);
 
                 }else{
 
-                  this.r_dolar.text(0);
-                  this.r_bs.text(0);
+                  this.r_dolar.val(0);
+                  this.r_bs.val(0);
                   this.label_resto.html("El cliente debe :<b>"+res_bs +"</b> Bs.");
                   toglee_pago_class(false);
 
@@ -298,16 +301,16 @@ function init() {
                }else{
 
                   var res_bs =  pago_bs -  total_bs_venta;
-                  this.r_dolar.text(0);
+                  this.r_dolar.val(0);
 
                   if(res_bs>=0){
 
-                    this.r_bs.text(res_bs);
-                    this.label_resto.html("El cliente ha pagado completo");
+                    this.r_bs.val(res_bs);
+                    this.label_resto.html("El cliente ha pagado ");
                     toglee_pago_class(true);
               
                   }else{
-                    this.r_bs.text(0);
+                    this.r_bs.val(0);
                     this.label_resto.html("El cliente debe :<b>"+(-1*res_bs) +" Bs.</b>");
                     toglee_pago_class(false);
                   }
@@ -327,11 +330,21 @@ function init() {
                         if(pago_bs>0){
 
                           var res_bs = pago_bs - monto_bs;
-                          this.r_bs.text(res_bs);
+                          if(res_bs>=0){
+
+                             
+                            this.r_bs.val(res_bs);
+                            this.label_resto.html("El cliente ha pagado ");
+                          }else{
+
+
+                            this.label_resto.html("El cliente debe : "+(res_bs*-1)+" Bs.");
+                          }
+                       
                         }else{
 
-                          this.r_dolar.text(0);
-                          this.r_bs.text(0);
+                          this.r_dolar.val(0);
+                          this.r_bs.val(0);
                         }
            
 
@@ -341,10 +354,10 @@ function init() {
                       //console.log("monto_dolar:"+monto_dolar); 
                       var res_bs    = precio_bs_dolar - monto_bs + pago_bs;
  
-                      this.r_dolar.text(res_dolar);
-                      this.r_bs.text(res_bs);
+                      this.r_dolar.val(res_dolar);
+                      this.r_bs.val(res_bs);
            
-                      this.label_resto.html("El cliente ha pagado completo");
+                      this.label_resto.html("El cliente ha pagado ");
                       if(pago_bs > 0){
 
                          this.label_resto.html(this.label_resto.html()+ " <br> " + " El cliente esta cancelando "+ pago_bs + " Bs. demas " );
@@ -367,7 +380,29 @@ function init() {
             }
 
             //console.log("f_pago: " +monto_dolar  + "::"+ monto_bs)
+
+
+            this.label_p_dolar.html("Precio del Dolar :" + this.p_b_dolar.val()+" Bs.");
+            this.label_t_venta.html("Monto Total de la Venta : "+this.t_b_venta.val()+" Bs.");
           },
+          f_divisas:function(){
+
+            
+
+            
+                var precio_bs_dolar =  this.p_b_dolar.data("val_float");
+                var monto_dolar     =  this.m_dolar.data("val_float");
+                console.log("f_divisas :"+precio_bs_dolar);
+              if(precio_bs_dolar>0){
+                var total = precio_bs_dolar * monto_dolar;
+                console.log("monto_divisa: " + total);
+                this.t_b_venta.val(total);
+                this.t_b_venta.trigger("input");
+
+              }
+
+          }
+          ,
           init:function(){
 
             this.p_b_dolar.trigger("input");
@@ -403,7 +438,11 @@ function init() {
    cal.p_bs.on("input",function(){
         cal.f_pago();
    }); 
-      
+   cal.m_dolar.on("input",function(){
+
+    cal.f_divisas();
+
+   });  
 
    
 }
